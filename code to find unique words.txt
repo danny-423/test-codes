@@ -1,0 +1,29 @@
+import re
+from collections import Counter
+
+def count_words(file_path):
+    # Read the entire content of the file
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+    
+    # Normalize text: convert to lowercase and remove unwanted characters
+    words = re.findall(r'\w+', text.lower())
+    
+    # Count frequencies of each word
+    word_counts = Counter(words)
+    
+    # Total number of words
+    total_words = sum(word_counts.values())
+    
+    # Top 20 most frequent words
+    top_20 = word_counts.most_common(20)
+    
+    # Print the results
+    print(f"Total Words: {total_words}")
+    print("Top 20 Words:")
+    for word, count in top_20:
+        print(f"{word}: {count}")
+
+# Example usage:
+file_path = 'input.txt'
+count_words(file_path)
